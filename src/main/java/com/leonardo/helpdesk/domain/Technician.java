@@ -3,16 +3,26 @@ package com.leonardo.helpdesk.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Technician extends Person{
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
+import com.leonardo.helpdesk.domain.enums.Profile;
+
+@Entity
+public class Technician extends Person{
+	private static final long serialVersionUID = 1L;
+	
+	@OneToMany(mappedBy = "technician")
 	private List<Called> called = new ArrayList<>();
 
 	public Technician() {
 		super();
+		addProfile(Profile.CLIENT);
 	}
 
 	public Technician(Integer id, String name, String cpf, String email, String password) {
 		super(id, name, cpf, email, password);
+		addProfile(Profile.CLIENT);
 	}
 
 	public List<Called> getCalled() {
