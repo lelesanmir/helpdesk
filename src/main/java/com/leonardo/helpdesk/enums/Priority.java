@@ -1,4 +1,4 @@
-package com.leonardo.helpdesk.domain.enums;
+package com.leonardo.helpdesk.enums;
 
 public enum Priority {
 	

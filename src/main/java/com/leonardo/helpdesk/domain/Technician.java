@@ -6,7 +6,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
-import com.leonardo.helpdesk.domain.enums.Profile;
+import com.leonardo.helpdesk.enums.Profile;
 
 @Entity
 public class Technician extends Person{

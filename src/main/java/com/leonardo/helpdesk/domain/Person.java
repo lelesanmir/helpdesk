@@ -16,7 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.leonardo.helpdesk.domain.enums.Profile;
+import com.leonardo.helpdesk.enums.Profile;
 
 @Entity
 public abstract class Person implements Serializable {

@@ -12,8 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.leonardo.helpdesk.domain.enums.Priority;
-import com.leonardo.helpdesk.domain.enums.Status;
+import com.leonardo.helpdesk.enums.Priority;
+import com.leonardo.helpdesk.enums.Status;
 
 @Entity
 public class Called implements Serializable {
