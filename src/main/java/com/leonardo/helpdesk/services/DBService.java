@@ -32,12 +32,18 @@ public class DBService {
 		tec1.addProfile(Profile.ADMIN);
 
 		Client cli1 = new Client(null, "Jeremias Isac", "54398709821", "jeremias@hotmail.com", "321");
+		Client cli2 = new Client(null, "Joab Isac", "54398559821", "joab@hotmail.com", "321");
 
 		Called c1 = new Called(null, Priority.AVERAGE, Status.PROGRESS, "Called 01", "First called", tec1, cli1);
+		Called c2 = new Called(null, Priority.AVERAGE, Status.OPEN, "Called 02", "Two called", tec1, cli2);
 
 		technicianRepository.saveAll(Arrays.asList(tec1));
 		clientRepository.saveAll(Arrays.asList(cli1));
+		clientRepository.saveAll(Arrays.asList(cli2));
+		
 		calledRepository.saveAll(Arrays.asList(c1));
+		calledRepository.saveAll(Arrays.asList(c2));
+		
 
 	}
 }
