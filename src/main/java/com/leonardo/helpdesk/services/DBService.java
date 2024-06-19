@@ -30,6 +30,10 @@ public class DBService {
 	public void instanceDB() {
 		Technician tec1 = new Technician(null, "Leonardo S. Miranda", "63653230268", "leo@gmail.com", "123");
 		tec1.addProfile(Profile.ADMIN);
+		Technician tec2 = new Technician(null, "Juli S. Miranda", "63653230118", "julio@gmail.com", "123");
+		tec2.addProfile(Profile.ADMIN);
+		Technician tec3 = new Technician(null, "Mario S. Miranda", "22653230268", "mario@gmail.com", "123");
+		tec3.addProfile(Profile.ADMIN);
 
 		Client cli1 = new Client(null, "Jeremias Isac", "54398709821", "jeremias@hotmail.com", "321");
 		Client cli2 = new Client(null, "Joab Isac", "54398559821", "joab@hotmail.com", "321");
@@ -38,6 +42,10 @@ public class DBService {
 		Called c2 = new Called(null, Priority.AVERAGE, Status.OPEN, "Called 02", "Two called", tec1, cli2);
 
 		technicianRepository.saveAll(Arrays.asList(tec1));
+		technicianRepository.saveAll(Arrays.asList(tec2));
+		technicianRepository.saveAll(Arrays.asList(tec3));
+		
+		
 		clientRepository.saveAll(Arrays.asList(cli1));
 		clientRepository.saveAll(Arrays.asList(cli2));
 		
