@@ -3,6 +3,8 @@ package com.leonardo.helpdesk.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +21,7 @@ public class TechnicianService {
 
 	@Autowired
 	private TechnicianRepository repository;
-	
+
 	@Autowired
 	private PersonRepository personRepository;
 
@@ -35,20 +37,29 @@ public class TechnicianService {
 
 	public Technician create(TechnicianDTO objDTO) {
 		objDTO.setId(null);
-		validaPorCpfEEmail(objDTO);
+		validateByCpfEEmail(objDTO);
 		Technician newObj = new Technician(objDTO);
 		return repository.save(newObj);
 	}
 
-	private void validaPorCpfEEmail(TechnicianDTO objDTO) {
+	public Technician update(Integer id, @Valid TechnicianDTO objDto) {
+		objDto.setId(id);
+		Technician oldObj = findById(id);
+		validateByCpfEEmail(objDto);
+		oldObj = new Technician(objDto);
+		return repository.save(oldObj);
+	}
+
+	private void validateByCpfEEmail(TechnicianDTO objDTO) {
 		Optional<Person> obj = personRepository.findByCpf(objDTO.getCpf());
-		if(obj.isPresent() && obj.get().getId() != objDTO.getId()) {
+		if (obj.isPresent() && obj.get().getId() != objDTO.getId()) {
 			throw new DataIntegrityViolationException("CPF already registered in the system!");
 		}
-		
+
 		obj = personRepository.findByEmail(objDTO.getEmail());
-		if(obj.isPresent() && obj.get().getId() != objDTO.getId()) {
+		if (obj.isPresent() && obj.get().getId() != objDTO.getId()) {
 			throw new DataIntegrityViolationException("E-mail already registered in the system!");
 		}
 	}
+
 }

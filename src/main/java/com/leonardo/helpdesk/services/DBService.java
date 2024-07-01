@@ -28,15 +28,15 @@ public class DBService {
 	private CalledRepository calledRepository;
 
 	public void instanceDB() {
-		Technician tec1 = new Technician(null, "Leonardo S. Miranda", "63653230268", "leo@gmail.com", "123");
+		Technician tec1 = new Technician(null, "Leonardo S. Miranda", "348.772.840-01", "leo@gmail.com", "123");
 		tec1.addProfile(Profile.ADMIN);
-		Technician tec2 = new Technician(null, "Juli S. Miranda", "63653230118", "julio@gmail.com", "123");
+		Technician tec2 = new Technician(null, "Juli S. Miranda", "982.615.180-78", "julio@gmail.com", "123");
 		tec2.addProfile(Profile.ADMIN);
-		Technician tec3 = new Technician(null, "Mario S. Miranda", "22653230268", "mario@gmail.com", "123");
+		Technician tec3 = new Technician(null, "Mario S. Miranda", "765.950.850-46", "mario@gmail.com", "123");
 		tec3.addProfile(Profile.ADMIN);
 
-		Client cli1 = new Client(null, "Jeremias Isac", "54398709821", "jeremias@hotmail.com", "321");
-		Client cli2 = new Client(null, "Joab Isac", "54398559821", "joab@hotmail.com", "321");
+		Client cli1 = new Client(null, "Jeremias Isac", "005.612.370-18", "jeremias@hotmail.com", "321");
+		Client cli2 = new Client(null, "Joab Isac", "707.447.850-49", "joab@hotmail.com", "321");
 
 		Called c1 = new Called(null, Priority.AVERAGE, Status.PROGRESS, "Called 01", "First called", tec1, cli1);
 		Called c2 = new Called(null, Priority.AVERAGE, Status.OPEN, "Called 02", "Two called", tec1, cli2);

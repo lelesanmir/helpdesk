@@ -25,7 +25,7 @@ public class TechnicianDTO implements Serializable {
 	@NotNull(message = "The PASSSWORD field is required!")
 	protected String password;
 	protected Set<Integer> profiles = new HashSet<>();
-	@JsonFormat(pattern = "dd/MM/YYYY")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	protected LocalDate dateCreation = LocalDate.now();
 
 	public TechnicianDTO() {

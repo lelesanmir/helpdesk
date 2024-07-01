@@ -15,31 +15,34 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.validator.constraints.br.CPF;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.leonardo.helpdesk.enums.Profile;
 
 @Entity
 public abstract class Person implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Integer id;
 	protected String name;
-	
+
+	@CPF
 	@Column(unique = true)
 	protected String cpf;
-	
+
 	@Column(unique = true)
 	protected String email;
 	protected String password;
-	
+
 	@ElementCollection(fetch = FetchType.EAGER)
 	protected Set<Integer> profiles = new HashSet<>();
-	
+
 	@JsonFormat(pattern = "dd/MM/YYYY")
 	protected LocalDate dateCreation = LocalDate.now();
-	
+
 	public Person() {
 		super();
 		addProfile(Profile.CLIENT);
@@ -127,5 +130,5 @@ public abstract class Person implements Serializable {
 		Person other = (Person) obj;
 		return Objects.equals(cpf, other.cpf) && Objects.equals(id, other.id);
 	}
-			
+
 }
