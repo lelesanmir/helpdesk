@@ -50,6 +50,14 @@ public class TechnicianService {
 		return repository.save(oldObj);
 	}
 
+	public void delete(Integer id) {
+		Technician obj = findById(id);
+		if(obj.getCalled().size() > 0) {
+			throw new DataIntegrityViolationException("Technician has a service order and cannot be deleted!");
+		}
+			repository.deleteById(id);
+	}
+
 	private void validateByCpfEEmail(TechnicianDTO objDTO) {
 		Optional<Person> obj = personRepository.findByCpf(objDTO.getCpf());
 		if (obj.isPresent() && obj.get().getId() != objDTO.getId()) {
