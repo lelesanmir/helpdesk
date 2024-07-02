@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.leonardo.helpdesk.domain.Called;
@@ -20,11 +21,17 @@ public class CalledDTO implements Serializable {
 	private LocalDate openDate = LocalDate.now();
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate closingDate;
+	@NotNull(message = "The PRIORITY field is required!")
 	private Integer priority;
+	@NotNull(message = "The STATUS field is required!")
 	private Integer status;
+	@NotNull(message = "The TITLE field is required!")
 	private String title;
+	@NotNull(message = "The OBSERVATION field is required!")
 	private String observation;
+	@NotNull(message = "The TECHNICIAN field is required!")
 	private Integer technician;
+	@NotNull(message = "The CLIENT field is required!")
 	private Integer client;
 	private String nameTechnician;
 	private String nameClient;
