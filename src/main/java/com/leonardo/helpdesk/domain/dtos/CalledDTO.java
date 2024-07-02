@@ -142,5 +142,4 @@ public class CalledDTO implements Serializable {
 	public void setNameClient(String nameClient) {
 		this.nameClient = nameClient;
 	}
-
 }

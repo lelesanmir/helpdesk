@@ -1,5 +1,6 @@
 package com.leonardo.helpdesk.services;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,8 +23,10 @@ public class CalledService {
 
 	@Autowired
 	private CalledRepository repository;
+
 	@Autowired
 	private TechnicianService technicianService;
+
 	@Autowired
 	private ClientService clientService;
 
@@ -40,22 +43,45 @@ public class CalledService {
 		return repository.save(newCalled(objDto));
 	}
 
-	private Called newCalled(CalledDTO obj) {
-		Technician technician = technicianService.findById(obj.getTechnician());
-		Client client = clientService.findById(obj.getClient());
-
-		Called called = new Called();
-		if (obj.getId() != null) {
-			called.setId(obj.getId());
-		}
-
-		called.setTechnician(technician);
-		called.setClient(client);
-		called.setPriority(Priority.toEnum(obj.getPriority()));
-		called.setStatus(Status.toEnum(obj.getStatus()));
-		called.setTitle(obj.getTitle());
-		called.setObservation(obj.getObservation());
-		return called;
+	public Called update(Integer id, @Valid CalledDTO objDto) {
+		objDto.setId(id);
+		Called oldObj = findById(id);
+		updateData(oldObj, objDto);
+		return repository.save(oldObj);
 	}
 
+	private void updateData(Called entity, CalledDTO objDto) {
+		entity.setPriority(Priority.toEnum(objDto.getPriority()));
+		entity.setStatus(Status.toEnum(objDto.getStatus()));
+		entity.setTitle(objDto.getTitle());
+		entity.setObservation(objDto.getObservation());
+		entity.setTechnician(technicianService.findById(objDto.getTechnician()));
+		entity.setClient(clientService.findById(objDto.getClient()));
+
+		if (objDto.getStatus() == 2 && entity.getClosingDate() == null) {
+			entity.setClosingDate(LocalDate.now());
+		} else if (objDto.getStatus() != 2) {
+			entity.setClosingDate(null);
+		}
+	}
+
+	private Called newCalled(CalledDTO objDto) {
+		Technician technician = technicianService.findById(objDto.getTechnician());
+		Client client = clientService.findById(objDto.getClient());
+
+		Called called = new Called();
+		called.setOpenDate(LocalDate.now());
+		called.setPriority(Priority.toEnum(objDto.getPriority()));
+		called.setStatus(Status.toEnum(objDto.getStatus()));
+		called.setTitle(objDto.getTitle());
+		called.setObservation(objDto.getObservation());
+		called.setTechnician(technician);
+		called.setClient(client);
+
+		if (objDto.getStatus() == 2) {
+			called.setClosingDate(LocalDate.now());
+		}
+
+		return called;
+	}
 }
